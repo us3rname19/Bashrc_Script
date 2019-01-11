@@ -5,7 +5,7 @@ displayed the time of execution.
 Checked on Ubuntu Mate.
 
 Installation:
-Download file "bashrc", renamed to ".bashrc" then replaced it in home and /root directory.
+Download file "bashrc", rename to ".bashrc" then replace it in home and /root directory.
 
 Cкрипт командной оболочки bash. После запуска выводит в терминале информацию 
 об ip адресе, RAM, температуре CPU. После выполнения команды отображается время выполнения.
