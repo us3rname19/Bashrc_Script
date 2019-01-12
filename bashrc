@@ -41,6 +41,10 @@ if [ -n "$temp" ]; then
 fi
 #end temp info
 
+#ip info
+ip_menu="$(curl -s -m 10 ipinfo.io/ip)" 
+co_menu="$(curl -s -m 10 ipinfo.io/country)"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -169,7 +173,7 @@ if [ -d $HOME/bin ]; then
 fi
 
 # ip,RAM,cpu temp info
-echo -e "$CYAN|$BLUE`wget -qO- start.parrotsec.org/ip/`$CYAN|
+echo -e "$CYAN|$BLUE$ip_menu $co_menu$CYAN|
 $CYAN|$BLUE$mem$CYAN|
 $CYAN|$BLUE$cpu$CYAN|"
 
