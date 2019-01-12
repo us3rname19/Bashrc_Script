@@ -31,6 +31,7 @@ mem_info=$(</proc/meminfo)
 
 mem="RAM:${usedmem}/${totalmem}GiB" 
 
+
 #cpu temp info
 thermal="/sys/class/hwmon/hwmon0/temp1_input"
 if [ -e $thermal ]; then
@@ -41,9 +42,11 @@ if [ -n "$temp" ]; then
 fi
 #end temp info
 
-#ip info
+
+#ip_info
 ip_menu="$(curl -s -m 10 ipinfo.io/ip)" 
 co_menu="$(curl -s -m 10 ipinfo.io/country)"
+
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
