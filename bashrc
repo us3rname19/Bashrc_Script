@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# If not running interactively, don't do anything
+
 export WHITE='\033[1;97m'
 export CYAN='\033[0;36m'
 export BLUE='\033[1;94m'
@@ -17,35 +19,49 @@ esac
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:~/local/bin
 
 #memory info
-mem_info=$(</proc/meminfo)
-		mem_info=$(echo $(echo $(mem_info=${mem_info// /}; echo ${mem_info//kB/})))
-		for m in $mem_info; do
-			case ${m//:*} in
-				"MemTotal") usedmem=$((usedmem+=${m//*:})); totalmem=${m//*:} ;;
-				"ShMem") usedmem=$((usedmem+=${m//*:})) ;;
-				"MemFree"|"Buffers"|"Cached"|"SReclaimable") usedmem=$((usedmem-=${m//*:})) ;;
+function memory() {
+    mem_info=$(</proc/meminfo)
+	mem_info=$(echo $(echo $(mem_info=${mem_info// /}; echo ${mem_info//kB/})))
+	for m in $mem_info; do
+		case ${m//:*} in
+			"MemTotal") usedmem=$((usedmem+=${m//*:})); totalmem=${m//*:} ;;
+			"ShMem") usedmem=$((usedmem+=${m//*:})) ;;
+			"MemFree"|"Buffers"|"Cached"|"SReclaimable") usedmem=$((usedmem-=${m//*:})) ;;
 			esac
 		done
-		usedmem=$((usedmem / 1000000)) #Change 1000000 to 1024 to display in MB
-		totalmem=$((totalmem / 1000000)) #Change 1000000 to 1024 to display in MB
+		usedmem=$((usedmem / 1024)) #Change 1000000 or 1024 to display in MB or Gib
+		totalmem=$((totalmem / 1024)) #Change 1000000 or 1024 to display in MB or GiB
 
-mem="RAM:${usedmem}/${totalmem}GiB" 
-
+    mem="RAM:${usedmem}/${totalmem}MB"
+    echo $mem  
+}
 
 #cpu temp info
-thermal="/sys/class/hwmon/hwmon0/temp1_input"
-if [ -e $thermal ]; then
-    temp=$(bc <<< "scale=1; $(cat $thermal)/1000")
-fi
-if [ -n "$temp" ]; then
-    cpu="$cpu${temp}°C"
-fi
-#end temp info
+function cpu_temp() {
+    thermal="/sys/class/hwmon/hwmon0/temp1_input"
 
+    if [ -e $thermal ]; then
+       temp=$(bc <<< "scale=1; $(cat $thermal)/1000")
+    fi
 
-#ip_info
-ip_menu="$(curl -s -m 10 ipinfo.io/ip)" 
-co_menu="$(curl -s -m 10 ipinfo.io/country)"
+    if [ -n "$temp" ]; then
+       cpu="$cpu${temp}°C"
+    fi
+
+    echo "CPU temp: $cpu" 
+}
+
+#ip info
+function ip_info() {
+    ip_menu="$(curl -s -m 10 ipinfo.io/ip)"
+    co_menu="$(curl -s -m 10 ipinfo.io/country)"
+    echo $ip_menu $co_menu 
+}
+#end ip info
+
+#displ info
+
+echo -e "$CYAN|$BLUE$(memory)$CYAN|\n|$BLUE$(cpu_temp)$CYAN|\n|$BLUE$(ip_info)$CYAN|" #|lolcat
 
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -122,7 +138,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\033[0;36m\]\342\224\214\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\210\n\[\033[0;36m\]\342\224\224\342\224\200(\[\033[1;34m\]\t\[\033[0;36m\])\n\n\[\033[0;36m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;36m\]\342\234\227\[\033[0;36m\]]\342\224\200\")($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]root\[\033[01;34m\]@\[\033[01;34m\]\h'; else echo '\[\033[1;36m\]\u\[\033[1;34m\]@\[\033[1;34m\]\h'; fi)\[\033[0;36m\])\342\224\200(\[\033[1;34m\]\w\[\033[0;36m\])\342\224\200\342\224\200\342\224\200\342\224\200\342\224\210\n\[\033[0;36m\]\342\224\224\342\224\200(\[\033[0m\]\[\e[1;34m\]\\$\[\e[0m\]"
+    PS1="\[\033[0;36m\]\342\224\214\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\210\n\[\033[0;36m\]\342\224\224\342\224\200(\[\033[1;34m\]\t\[\033[0;36m\])\n\n\[\033[0;36m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;36m\]\342\234\227\[\033[0;36m\]]\342\224\200\")($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]root\[\033[01;34m\]@\[\033[01;34m\]\h'; else echo '\[\033[1;36m\]\u\[\033[1;34m\]@\[\033[1;34m\]\h'; fi)\[\033[0;36m\])\342\224\200(\[\033[1;34m\]\w\[\033[0;36m\])\342\224\200\342\224\200\342\224\200\342\224\200\342\224\210\n\[\033[0;36m\]\342\224\224\342\224\200(\[\033[0m\]\[\e[1;36m\]\\$\[\e[0m\]"
     ;;
 *)
     ;;
@@ -174,9 +190,3 @@ fi
 if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
 fi
-
-# ip,RAM,cpu temp info
-echo -e "$CYAN|$BLUE$ip_menu $co_menu$CYAN|
-$CYAN|$BLUE$mem$CYAN|
-$CYAN|$BLUE$cpu$CYAN|"
-
