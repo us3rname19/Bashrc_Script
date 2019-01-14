@@ -23,12 +23,12 @@ Download file "bashrc", rename to ".bashrc" then replace it in home and /root di
 
 
 ```bash                                                                                                                                                                                                                                                 
-|17.134.234.78 US|                                                                                                          
-|RAM:1/16GiB|                                                                                                                 
-|49.0°C|                                                                                                                     
-┌───────────┈                      
-└─(18:28:45)                                                                                                                    
-                                                                                                                            
+|RAM:876/15937MB|
+|CPU temp:51.0°C|
+|51.15.234.90 FR|
+┌───────────┈
+└─(14:35:15)
+                                                                                                                     
 ┌─(username@hostname)─(~)────┈                 
 └─($                                                                                                                          
                                                                                                                          
