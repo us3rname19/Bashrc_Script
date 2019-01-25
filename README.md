@@ -16,5 +16,6 @@ Cкачать "bashrc", переименовать в ".bashrc" и замени�
 
 ![screenshot at 2019-01-25 10-29-58](https://user-images.githubusercontent.com/43719011/51720769-acf06980-209a-11e9-88b7-23e3dea24e2d.png)
 
-![screenshot at 2019-01-25 12-24-21](https://user-images.githubusercontent.com/43719011/51721210-829fab80-209c-11e9-898e-a5cc0d51325b.png)
+![screenshot at 2019-01-25 12-38-22](https://user-images.githubusercontent.com/43719011/51721696-91875d80-209e-11e9-99ae-32bb1576aa4f.png)
+
 
