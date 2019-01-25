@@ -33,7 +33,7 @@ function memory() {
 		usedmem=$((usedmem / 1024)) #Change 1000000 or 1024 to display in MB or Gib
 		totalmem=$((totalmem / 1024)) #Change 1000000 or 1024 to display in MB or GiB
 
-    mem="RAM:${usedmem}/${totalmem}MB"
+    mem="${usedmem}/${totalmem}MiB"
     echo $mem  
 }
 
@@ -49,7 +49,7 @@ function cpu_temp() {
        cpu="$cpu${temp}°C"
     fi
 
-    echo "CPU temp: $cpu" 
+    echo " $cpu" 
 }
 
 #ip info
