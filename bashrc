@@ -63,7 +63,7 @@ function ip_info() {
 #displ info
 echo -e "$CYAN┌$CYAN1━[RAM:$BLUE$(memory)
 $CYAN├$CYAN1━[CPU temp:$BLUE$(cpu_temp)"
-echo -e "$CYAN├$CYAN1━[Local ip:$BLUE`hostname -I| grep -Eo '192.168.([1]*\.)[0-9]*'`"
+echo -e "$CYAN├$CYAN1━[Local ip:$BLUE`hostname -I`
 echo -e "$CYAN└$CYAN1━[Public ip:$BLUE$(ip_info)"
 
 
