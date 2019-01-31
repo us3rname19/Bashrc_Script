@@ -14,7 +14,8 @@ Download file "bashrc", rename to ".bashrc" then replace it in /home and /root d
 # Для установки:
 Cкачать "bashrc", переименовать в ".bashrc" и заменить в /home и /root директориях.
 
-![screenshot at 2019-01-28 16-42-06](https://user-images.githubusercontent.com/43719011/51818971-7b86d080-231c-11e9-883d-4488afdd8344.png)
+![ezgif-5-b458da2c3973](https://user-images.githubusercontent.com/43719011/52048462-2dc9cc80-2597-11e9-89c6-1cdc3a87ccae.gif)
+
 
 
 
