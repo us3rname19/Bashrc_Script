@@ -70,7 +70,7 @@ $CYAN─$CYAN1━[Location:`pwd`
 $CYAN─$CYAN1━[Shell:`echo "$SHELL" | awk -F'/' '{print $NF}'` `echo $BASH_VERSION` 
 $CYAN─$CYAN1━[RAM:$BLUE$(memory)                                                  
 $CYAN─$CYAN1━[CPU temp:$BLUE$(cpu_temp)                                            
-$CYAN─$CYAN1━[Local ip:$BLUE`hostname -I`       
+$CYAN─$CYAN1━[Local ip:$BLUE`ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`       
 $CYAN─$CYAN1━[Public ip:$BLUE$(ip_info)                                            
                                                                                 
 $CYAN1 Filesys        Size  Used Avail Use% Mounted on$BLUE                      
